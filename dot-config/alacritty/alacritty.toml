@@ -1,5 +1,6 @@
 [env]
 TERM = "xterm-256color"
+SHELL = "/bin/zsh"
 
 [font]
 normal.family = "JetBrainsMono Nerd Font"
@@ -12,3 +13,5 @@ program = "/bin/zsh"
 opacity = 0.9
 padding.x = 7
 padding.y = 2
+dimensions.columns = 132
+dimensions.lines = 40
