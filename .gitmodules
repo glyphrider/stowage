@@ -1,3 +1,7 @@
 [submodule "tpm"]
 	path = dot-tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "nvchad"]
+	path = dot-config/nvim
+	url = https://github.com/nvchad/nvchad
+	branch = v2.0
