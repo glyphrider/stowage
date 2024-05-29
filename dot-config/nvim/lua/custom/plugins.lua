@@ -1,6 +1,6 @@
 local plugins = {
   {
-    "willaimboman/mason.nvim",
+    "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
         "rust-analyzer",
