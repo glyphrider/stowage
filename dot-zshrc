@@ -71,7 +71,7 @@ zstyle ':omz:plugins:ssh-agent' helper ksshaskpass
 
 # Aliases
 alias ls='eza --color=auto --icons --git'
-alias stow="stow -t $HOME --dotfiles --no-folding"
+alias stow="stow -t $HOME --dotfiles" #  --no-folding"
 
 # Shell Integrations
 eval "$(fzf --zsh)"
