@@ -23,11 +23,49 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
+    "neovim/nvim-lspconfig",
+    name = "lspconfig",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+    },
+    config = function()
+      require("mason").setup()
+      require("mason-lspconfig").setup()
+
+      require("mason-lspconfig").setup_handlers {
+        -- The first entry (without a key) will be the default handler
+        -- and will be called for each installed server that doesn't have
+        -- a dedicated handler.
+        function (server_name) -- default handler (optional)
+          require("lspconfig")[server_name].setup {}
+        end,
+      }
+    end,
+  },
+  {
     "williamboman/mason.nvim",
     name = "mason",
     config = function()
       require("mason").setup()
     end
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    name = "treesitter",
+    config = function()
+      vim.cmd.TSUpdate()
+    end,
+  }, 
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    },
   },
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.6',
@@ -50,4 +88,4 @@ require("lazy").setup({
 })
 
 vim.cmd.colorscheme "catppuccin" 
-vim.keymap.set("n","<leader>pv",vim.cmd.Ex)
+vim.keymap.set("n","<C-e>",vim.cmd.Neotree)
