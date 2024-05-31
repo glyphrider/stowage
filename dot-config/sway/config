@@ -25,6 +25,7 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /usr/share/backgrounds/archlinux/gritty.png fill
 
 #
 # Example configuration:
@@ -67,13 +68,13 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
 # Start a terminal
 bindsym $mod+Return exec $term # -T main tmux new-session -A -s main
-bindsym $mod+Q exec $term
+# bindsym $mod+Q exec $term
 
-bindsym $mod+Shift+g exec google-chrome-stable --new-window --app=https://chat.openai.com
-bindsym $mod+Shift+m exec google-chrome-stable --new-window --app=https://mail.google.com
+# bindsym $mod+Shift+g exec google-chrome-stable --new-window --app=https://chat.openai.com
+# bindsym $mod+Shift+m exec google-chrome-stable --new-window --app=https://mail.google.com
 
 # Kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+w kill
 
 # Start your launcher
 bindsym $mod+d exec $menu
@@ -91,7 +92,7 @@ bindsym $mod+Shift+c reload
 
 # Exit sway (logs you out of your Wayland session)
 # bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-bindsym $mod+Shift+e exec swaymsg exit
+bindsym $mod+q exec swaymsg exit
 bindsym $mod+m exec wlogout --protocol layer-shell
 #
 # Moving around:
@@ -241,6 +242,8 @@ bar swaybar_command waybar
 exec --no-startup-id systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
+exec --no-startup-id blueman-applet
+
 font pango:Hack Nerd Font Mono 12
 gaps inner 10
 exec swayidle -w \
@@ -252,7 +255,7 @@ exec swayidle -w \
 exec kwalletd6
 exec nm-applet
 
-bindsym $mod+x exec swaylock-fancy
+bindsym $mod+x exec env XDG_CURRENT_DESKTOP=sway swaylock-fancy
 
 default_border pixel 2
 
