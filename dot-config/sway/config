@@ -189,6 +189,7 @@ bindsym $mod+minus scratchpad show
 # Floating windows:
 #
 for_window [app_id="lutris"] floating enable
+for_window [app_id="virt-manager"] floating enable
 
 #
 # Resizing containers:
