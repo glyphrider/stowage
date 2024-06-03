@@ -1,8 +1,8 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
+# Default config for sway (edited)
 #
 # Read `man 5 sway` for a complete reference.
+
+# yay -S needed sway waybar swaybg swayidle swaylock-effects-git alacritty dmenu wofi
 
 ### Variables
 #
