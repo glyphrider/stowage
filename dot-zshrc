@@ -32,9 +32,7 @@ zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
 zinit snippet OMZP::aws
 zinit snippet OMZP::command-not-found
-zinit snippet OMZP::eza
 zinit snippet OMZP::fd
-zinit snippet OMZP::fzf
 
 zstyle :omz:plugins:ssh-agent helper ksshaskpass
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
@@ -76,7 +74,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 zstyle ':omz:plugins:ssh-agent' helper ksshaskpass
 
 # Aliases
-# alias ls='eza --color=auto --icons --git'
+alias ls='eza --color=auto --icons --git'
 alias stow="stow -t $HOME --dotfiles" #  --no-folding"
 
 # Shell Integrations
