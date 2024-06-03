@@ -164,6 +164,16 @@ require("lazy").setup({
 	-- "gc" to comment visual regions/lines
 	{ "numToStr/Comment.nvim", opts = {} },
 
+	{
+		"nvim-tree/nvim-tree.lua",
+		opts = {},
+		config = function()
+			require("nvim-tree").setup({
+				vim.keymap.set("n", "<leader>p", ":NvimTreeToggle<CR>"),
+			})
+		end,
+	},
+
 	-- Here is a more advanced example where we pass configuration
 	-- options to `gitsigns.nvim`. This is equivalent to the following Lua:
 	--    require('gitsigns').setup({ ... })
