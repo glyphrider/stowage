@@ -32,7 +32,6 @@ zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
 zinit snippet OMZP::aws
 zinit snippet OMZP::command-not-found
-zinit snippet OMZP::fd
 
 zstyle :omz:plugins:ssh-agent helper ksshaskpass
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
