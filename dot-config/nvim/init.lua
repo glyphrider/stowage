@@ -169,7 +169,7 @@ require("lazy").setup({
 		opts = {},
 		config = function()
 			require("nvim-tree").setup({
-				vim.keymap.set("n", "<leader>p", ":NvimTreeToggle<CR>"),
+				vim.keymap.set("n", "<leader>pv", ":NvimTreeToggle<CR>", { desc = "[P]roject [V]iew" } ),
 			})
 		end,
 	},
