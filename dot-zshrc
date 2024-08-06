@@ -70,15 +70,9 @@ alias ls='eza --color=auto --icons --git'
 alias stow="stow -t $HOME --dotfiles" #  --no-folding"
 #alias vim="nvim"
 
-path=("$HOME/.local/bin" $path)
-
 # Shell Integrations
 eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/dreamsofautonomy/zen-omp/main/zen.toml')"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 export GPG_TTY=$TTY
-
-# Path
-path+=("$HOME/.cargo/bin")
-fpath+=~/.zfunc
 
