@@ -22,8 +22,8 @@ zinit light Aloxaf/fzf-tab
 # Snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
-zinit snippet OMZP::aws
+#zinit snippet OMZP::archlinux
+#zinit snippet OMZP::aws
 zinit snippet OMZP::command-not-found
 
 zstyle :omz:plugins:ssh-agent helper ksshaskpass
@@ -68,7 +68,9 @@ zstyle ':omz:plugins:ssh-agent' helper ksshaskpass
 # Aliases
 alias ls='eza --color=auto --icons --git'
 alias stow="stow -t $HOME --dotfiles" #  --no-folding"
-alias vim="nvim"
+#alias vim="nvim"
+
+path=("$HOME/.local/bin" $path)
 
 # Shell Integrations
 eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/dreamsofautonomy/zen-omp/main/zen.toml')"
