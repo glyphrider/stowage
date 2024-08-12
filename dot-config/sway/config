@@ -14,7 +14,8 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term env KITTY_ENABLE_WAYLAND=1 kitty
+# set $term alacritty
 # set $term termite
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -192,7 +193,8 @@ bindsym $mod+minus scratchpad show
 #
 for_window [app_id="lutris"] floating enable
 for_window [app_id="virt-manager"] floating enable
-
+for_window [class="battle.net.exe"] floating enable
+for_window [class="Bitwarden"] floating enable
 #
 # Resizing containers:
 #

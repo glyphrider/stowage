@@ -10,8 +10,8 @@
     "margin-right": 5,
     "margin-top": 5,
     "modules-left": [
-      "wlr/taskbar",
-      "sway/workspaces"
+      "sway/workspaces",
+      "wlr/taskbar"
     ],
     "modules-center": [
       "sway/window"
