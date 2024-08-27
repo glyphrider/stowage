@@ -195,6 +195,7 @@ for_window [app_id="lutris"] floating enable
 for_window [app_id="virt-manager"] floating enable
 for_window [class="battle.net.exe"] floating enable
 for_window [class="Bitwarden"] floating enable
+for_window [app_id="org.raspberrypi.rpi-imager"] floating enable
 #
 # Resizing containers:
 #
