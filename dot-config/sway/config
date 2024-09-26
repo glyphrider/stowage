@@ -196,6 +196,7 @@ for_window [app_id="virt-manager"] floating enable
 for_window [class="battle.net.exe"] floating enable
 for_window [class="Bitwarden"] floating enable
 for_window [app_id="org.raspberrypi.rpi-imager"] floating enable
+for_window [app_id="steam_app_9450"] input "5426:83:Razer_Razer_Naga_Chroma" map_to_output "DP-1"
 #
 # Resizing containers:
 #
