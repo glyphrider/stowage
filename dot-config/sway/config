@@ -27,6 +27,8 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 output * bg /usr/share/backgrounds/archlinux/gritty.png fill
+output DP-1 resolution 2560x1440 position 0,0
+output DP-2 resolution 2560x1440 position 3000,0
 
 #
 # Example configuration:
