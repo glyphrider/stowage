@@ -5,4 +5,3 @@ Host cisco
 	FingerprintHash md5
 	IdentityFile ~/.ssh/id_rsa2048
 	PubkeyAcceptedKeyTypes=+ssh-rsa
-	#HostKeyAlgorithms=+ssh-rsa
