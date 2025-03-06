@@ -1,1 +1,8 @@
 SetEnv TERM=xterm-256color
+
+Host cisco
+	Hostname 192.168.1.253
+	FingerprintHash md5
+	IdentityFile ~/.ssh/id_rsa2048
+	PubkeyAcceptedKeyTypes=+ssh-rsa
+	#HostKeyAlgorithms=+ssh-rsa
