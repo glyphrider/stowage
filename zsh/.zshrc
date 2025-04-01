@@ -66,7 +66,8 @@ alias stow="stow -t $HOME --dotfiles" #  --no-folding"
 alias vim="nvim"
 
 # Shell Integrations
-eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/dreamsofautonomy/zen-omp/main/zen.toml')"
+#eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/dreamsofautonomy/zen-omp/main/zen.toml')"
+eval "$(oh-my-posh init zsh --config 'https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/avit.omp.json')"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 export GPG_TTY=$TTY
