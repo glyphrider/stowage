@@ -16,6 +16,7 @@
         "hyprland/window"
     ],
     "modules-right": [
+        "tray",
         "mpd",
         "idle_inhibitor",
         "pulseaudio",
