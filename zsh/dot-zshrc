@@ -18,12 +18,9 @@ zinit light denysdovhan/spaceship-prompt
 
 # Snippets
 zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
 zinit snippet OMZP::aws
 zinit snippet OMZP::command-not-found
 
-# zstyle :omz:plugins:ssh-agent helper ksshaskpass
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa2048 id_ed25519 id_ed25519_sk
 zstyle :omz:plugins:eza dirs-first yes
@@ -64,15 +61,6 @@ zstyle ':omz:plugins:ssh-agent' helper ksshaskpass
 
 # Aliases
 alias ls='eza --color=auto --icons --git'
-alias stow="stow -t $HOME --dotfiles" #  --no-folding"
-alias vim="nvim"
-
-# Shell Integrations
-#eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/dreamsofautonomy/zen-omp/main/zen.toml')"
-# eval "$(oh-my-posh init zsh --config 'https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/avit.omp.json')"
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-export GPG_TTY=$TTY
 
 # Path
 typeset -U PATH path
@@ -80,3 +68,19 @@ typeset -U PATH path
 [ ! -d "$HOME/.cargo/bin" ] || path+=("$HOME/.cargo/bin")
 fpath+=~/.zfunc
 
+# Shell Integrations
+#eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/dreamsofautonomy/zen-omp/main/zen.toml')"
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+export GPG_TTY=$TTY
+
+# Erlang on OpenBSD
+# alias erl=erl27
+# alias erlc=erlc27
+# alias epmd=epmd27
+# alias erl_call=erl_call27
+# alias escript=escript27
+
+path+=( /usr/local/lib/erlang27/bin )
+
+alias rebar3=rebar3-erl27

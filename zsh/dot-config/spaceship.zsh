@@ -26,4 +26,3 @@ SPACESHIP_PROMPT_ORDER=(
 )
 
 spaceship remove line_sep
-
