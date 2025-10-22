@@ -14,6 +14,8 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
+zinit light denysdovhan/spaceship-prompt
+
 # Snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
@@ -21,7 +23,7 @@ zinit snippet OMZP::archlinux
 zinit snippet OMZP::aws
 zinit snippet OMZP::command-not-found
 
-zstyle :omz:plugins:ssh-agent helper ksshaskpass
+# zstyle :omz:plugins:ssh-agent helper ksshaskpass
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa2048 id_ed25519 id_ed25519_sk
 zstyle :omz:plugins:eza dirs-first yes
@@ -67,7 +69,7 @@ alias vim="nvim"
 
 # Shell Integrations
 #eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/dreamsofautonomy/zen-omp/main/zen.toml')"
-eval "$(oh-my-posh init zsh --config 'https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/avit.omp.json')"
+# eval "$(oh-my-posh init zsh --config 'https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/avit.omp.json')"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 export GPG_TTY=$TTY
