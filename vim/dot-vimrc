@@ -3,3 +3,14 @@ set shiftwidth=2
 set expandtab
 set number
 set relativenumber
+set showmode
+set showmatch
+set ruler
+set report=1
+set encoding=utf-8
+syntax on
+
+call plug#begin()
+Plug 'tpope/vim-sensible'
+Plug 'vim-erlang/vim-erlang-runtime'
+call plug#end()
