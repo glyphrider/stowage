@@ -4,7 +4,7 @@
   signingKey = "A1268F7E5E7EBFDF"
 
 [tag]
-  gpgSign = true
+  # gpgSign = true
 
 [commit]
   # gpgSign = true
