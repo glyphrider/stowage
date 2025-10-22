@@ -81,6 +81,6 @@ export GPG_TTY=$TTY
 # alias erl_call=erl_call27
 # alias escript=escript27
 
-path+=( /usr/local/lib/erlang27/bin )
+path+=( /usr/local/lib/erlang28/bin )
 
 alias rebar3=rebar3-erl27
