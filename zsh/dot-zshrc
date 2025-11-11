@@ -14,13 +14,13 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-zinit light denysdovhan/spaceship-prompt
+# zinit light denysdovhan/spaceship-prompt
 
 # Snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
-zinit snippet OMZP::aws
+# zinit snippet OMZP::aws
 zinit snippet OMZP::command-not-found
 
 # zstyle :omz:plugins:ssh-agent helper ksshaskpass
@@ -31,6 +31,20 @@ zstyle :omz:plugins:eza git-status yes
 zstyle :omz:plugins:eza show-group yes
 
 zinit snippet OMZP::ssh-agent
+
+# Git Prompt
+autoload -Uz vcs_info
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats "[%F{green}%r:%b%f%u%c]"
+zstyle ':vcs_info:git:*' actionformats "[%F{green}%r:%b%F{white}(%a)%f%u%c]"
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr ' %F{yellow}%B%b%f'
+zstyle ':vcs_info:*' unstagedstr ' %F{red}%B%b%f'
+
+setopt prompt_subst
+add-zsh-hook precmd vcs_info
+export PROMPT='%(!.%F{red}.%F{green})%n%f@%F{cyan}%m%f%(?..%F{red}($?%)%f):%F{blue}%2~%f${vcs_info_msg_0_}%(!.%F{red} %f. )'
 
 autoload -U compinit && compinit
 
@@ -67,9 +81,7 @@ alias ls='eza --color=auto --icons --git'
 alias stow="stow -t $HOME --dotfiles" #  --no-folding"
 alias vim="nvim"
 
-# Shell Integrations
-#eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/dreamsofautonomy/zen-omp/main/zen.toml')"
-# eval "$(oh-my-posh init zsh --config 'https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/avit.omp.json')"
+# Shell Integration(s)
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 export GPG_TTY=$TTY
