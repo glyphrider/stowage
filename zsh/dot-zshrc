@@ -94,3 +94,6 @@ fpath+=~/.zfunc
 
 # set virsh to use the root account (not the user/session account)
 export LIBVIRT_DEFAULT_URI='qemu:///system'
+
+alias logo='hyprctl hyprpaper wallpaper ",/usr/share/hypr/wall0.png"'
+alias anime='hyprctl hyprpaper wallpaper ",/usr/share/hypr/wall2.png"'
