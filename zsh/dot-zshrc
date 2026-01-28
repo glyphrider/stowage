@@ -80,6 +80,7 @@ zstyle ':omz:plugins:ssh-agent' helper ksshaskpass
 alias ls='eza --color=auto --icons --git'
 alias stow="stow -t $HOME --dotfiles" #  --no-folding"
 alias vim="nvim"
+alias ydlmkv='yt-dlp -f "bestvideo&#91;ext=mkv]+bestaudio&#91;ext=mka]/best&#91;ext=mkv]/best"'
 
 # Shell Integration(s)
 eval "$(fzf --zsh)"
@@ -97,3 +98,6 @@ export LIBVIRT_DEFAULT_URI='qemu:///system'
 
 alias logo='hyprctl hyprpaper wallpaper ",/usr/share/hypr/wall0.png"'
 alias anime='hyprctl hyprpaper wallpaper ",/usr/share/hypr/wall2.png"'
+alias arch='hyprctl hyprpaper wallpaper ",/usr/share/backgrounds/archlinux/simple.png"'
+
+alias fixhyprlock='hyprctl --instance 0 "keyword misc:allow_session_lock_restore 1" && hyprctl --instance 0 "dispatch exec hyprlock"'
