@@ -24,6 +24,7 @@ local launcher    = "hyprlauncher"
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
+    hl.exec_cmd("systemctl --user start xdg-desktop-portal-gtk")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("mako")
@@ -239,11 +240,3 @@ hl.window_rule({
     no_focus = true,
 })
 
--- App → workspace assignments
-hl.window_rule({ name = "kitty-ws",   match = { class = "^kitty$"         }, workspace = "1"  })
-hl.window_rule({ name = "chrome-ws",  match = { class = "^google-chrome$" }, workspace = "2"  })
-hl.window_rule({ name = "slack-ws",   match = { class = "^Slack$"         }, workspace = "3"  })
-hl.window_rule({ name = "discord-ws", match = { class = "^discord$"       }, workspace = "4"  })
-hl.window_rule({ name = "brave-ws",   match = { class = "^brave-browser$" }, workspace = "5"  })
-hl.window_rule({ name = "signal-ws",  match = { class = "^signal$"        }, workspace = "6"  })
-hl.window_rule({ name = "steam-ws",   match = { class = "^steam$"         }, workspace = "10", float = false })
