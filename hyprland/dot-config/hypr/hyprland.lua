@@ -182,8 +182,8 @@ local mainMod = "SUPER"
 
 hl.bind(mainMod .. " + return",      hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + SHIFT + Q",   hl.dsp.window.close())
-hl.bind(mainMod .. " + SHIFT + E",   hl.dsp.exit())
-hl.bind(mainMod .. " + SHIFT + X",   hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + SHIFT + X",   hl.dsp.exit())
+hl.bind(mainMod .. " + X",           hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + V",           hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + D",           hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + R",           hl.dsp.exec_cmd(launcher))
