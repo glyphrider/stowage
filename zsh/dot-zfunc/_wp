@@ -1,0 +1,9 @@
+#compdef wp
+
+_wp() {
+    local -a wallpapers
+    wallpapers=( /usr/share/backgrounds/archlinux/*.(png|jpg)(N.:t) )
+    _describe 'wallpaper' wallpapers
+}
+
+_wp "$@"

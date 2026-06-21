@@ -84,20 +84,28 @@ alias ydlmkv='yt-dlp -f "bestvideo&#91;ext=mkv]+bestaudio&#91;ext=mka]/best&#91;
 
 # Shell Integration(s)
 eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
 export GPG_TTY=$TTY
 
 # Path
-typeset -U PATH path
 [ ! -d "$HOME/.local/bin" ] || path=("$HOME/.local/bin" $path)
 [ ! -d "$HOME/.cargo/bin" ] || path+=("$HOME/.cargo/bin")
+[ ! -d "$HOME/go/bin" ] || path+=("$HOME/go/bin")
 fpath+=~/.zfunc
+autoload -Uz _wp
+compdef _wp wp
 
 # set virsh to use the root account (not the user/session account)
 export LIBVIRT_DEFAULT_URI='qemu:///system'
+
+wp() { hyprctl hyprpaper wallpaper ",/usr/share/backgrounds/archlinux/$1" }
 
 alias logo='hyprctl hyprpaper wallpaper ",/usr/share/hypr/wall0.png"'
 alias anime='hyprctl hyprpaper wallpaper ",/usr/share/hypr/wall2.png"'
 alias arch='hyprctl hyprpaper wallpaper ",/usr/share/backgrounds/archlinux/simple.png"'
 
 alias fixhyprlock='hyprctl --instance 0 "keyword misc:allow_session_lock_restore 1" && hyprctl --instance 0 "dispatch exec hyprlock"'
+
+alias awsume='. awsume'
+
+typeset -U PATH path
+eval "$(zoxide init --cmd cd zsh)"
