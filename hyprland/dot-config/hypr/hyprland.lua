@@ -23,8 +23,10 @@ local launcher    = "hyprlauncher"
 -------------------
 
 hl.on("hyprland.start", function()
+    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
-    hl.exec_cmd("systemctl --user start xdg-desktop-portal-gtk")
+    hl.exec_cmd("/usr/lib/xdg-desktop-portal-gtk")
+    hl.exec_cmd("/usr/lib/xdg-desktop-portal")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("mako")
