@@ -108,4 +108,4 @@ alias fixhyprlock='hyprctl --instance 0 "keyword misc:allow_session_lock_restore
 alias awsume='. awsume'
 
 typeset -U PATH path
-eval "$(zoxide init --cmd cd zsh)"
+_ZO_DOCTOR=0 eval "$(zoxide init --cmd cd zsh)"
