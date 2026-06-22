@@ -45,6 +45,7 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 | `vim/` | `.vimrc` (legacy) | `vim` |
 | `ssh/` | `~/.ssh/config` | `openssh` |
 | `gh/` | GitHub CLI config | `github-cli` |
+| `pass/` | `pass` password store (`~/.password-store/`) with GPG-encrypted keys | `pass` `gnupg` |
 
 `dot-config/` at the repo root holds older/inactive configs (sway, wofi, nvim, older hyprland/waybar). The active hyprland config lives in `hyprland/dot-config/hypr/`.
 
