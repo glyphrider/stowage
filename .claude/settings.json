@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "s=$(git submodule status 2>/dev/null | awk '/^-/{print $2}' | tr '\\n' ' '); p=$(for x in stow hyprland hyprlock hypridle hyprpaper waybar mako kitty alacritty tmux zsh fzf zoxide eza neovim github-cli wireplumber brightnessctl playerctl ttf-firacode-nerd ttf-noto-nerd; do pacman -Q \"$x\" &>/dev/null || printf '%s ' \"$x\"; done); [ -z \"$s\" ] && [ -z \"$p\" ] && exit 0; m=\"Stowage health:\"; [ -n \"$s\" ] && m=\"$m uninitialized submodules: ${s};\"; [ -n \"$p\" ] && m=\"$m missing packages: ${p};\"; printf '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"%s offer to fix with git submodule update --init or sudo pacman -S.\"}}' \"$m\"",
+            "statusMessage": "Checking stowage submodules and packages..."
+          }
+        ]
+      }
+    ]
+  }
+}
