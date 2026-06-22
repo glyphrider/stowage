@@ -1,0 +1,68 @@
+[
+  {
+    "battery": {
+      "format": "{capacity}% {icon}",
+      "format-charging": "{capacity}% 󰂄",
+      "format-icons": [
+        "󰂎",
+        "󰁺",
+        "󰁽",
+        "󰁿",
+        "󰁹"
+      ],
+      "states": {
+        "critical": 15
+      }
+    },
+    "custom/clock": {
+      "exec": "date '+%A, %B %d  %-I:%M %p'",
+      "format": "{}",
+      "interval": 10
+    },
+    "hyprland/workspaces": {
+      "format": "{id}"
+    },
+    "layer": "top",
+    "modules-center": [
+      "custom/clock"
+    ],
+    "modules-left": [
+      "hyprland/workspaces"
+    ],
+    "modules-right": [
+      "tray",
+      "bluetooth",
+      "pulseaudio",
+      "network",
+      "battery"
+    ],
+    "pulseaudio": {
+      "scroll-step": 5,
+      "format": "{volume}% {icon}",
+      "format-muted": "󰝟 muted",
+      "format-icons": {
+        "default": ["󰕿", "󰖀", "󰕾"]
+      },
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+    "bluetooth": {
+      "format": "󰂯",
+      "format-connected": "{device_alias} 󰂱",
+      "format-connected-battery": "{device_alias} {device_battery_percentage}% 󰂱",
+      "format-disabled": "󰂲",
+      "format-off": "󰂲",
+      "tooltip-format": "{controller_alias} ({controller_address})",
+      "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}",
+      "tooltip-format-enumerate-connected-battery": "{device_alias}  {device_battery_percentage}%",
+      "on-click": "blueman-manager"
+    },
+    "network": {
+      "format-disconnected": "󰤭",
+      "format-ethernet": "{ifname} 󰈀",
+      "format-wifi": "{essid} 󰤨",
+      "tooltip-format-wifi": "{signalStrength}% {frequency}MHz"
+    },
+    "position": "top"
+  }
+]
