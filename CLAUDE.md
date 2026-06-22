@@ -41,7 +41,8 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 | `zsh/` | `.zshrc`, spaceship prompt config, zsh completions (`dot-zfunc/`) | `zsh` `fzf` `zoxide` `eza` `ksshaskpass` (zinit installs itself on first shell launch) |
 | `tmux/` | tmux config + TPM plugins (tpm is a git submodule) | `tmux` |
 | `git/` | `.gitconfig` | `git` |
-| `vim/` | `.vimrc` | `neovim` (`vim` is aliased to `nvim`) |
+| `nvim/` | Neovim config via submodule (`glyphrider/kickstart.nvim`) | `neovim` |
+| `vim/` | `.vimrc` (legacy) | `vim` |
 | `ssh/` | `~/.ssh/config` | `openssh` |
 | `gh/` | GitHub CLI config | `github-cli` |
 
@@ -53,10 +54,15 @@ The main Hyprland config is `hyprland/dot-config/hypr/hyprland.lua` — a Lua fi
 
 ## tmux plugins
 
-TPM (`tpm`) is tracked as a git submodule at `tmux/dot-tmux/plugins/tpm`. After cloning, run:
+Two submodules require initialization after cloning:
 
 ```bash
 git submodule update --init
 ```
 
-Other plugins (catppuccin, tmux-battery, tmux-cpu, tmux-sensible, tmux-yank, vim-tmux-navigator) are checked in directly under `tmux/dot-tmux/plugins/`.
+| Submodule path | What it is |
+|---|---|
+| `tmux/dot-tmux/plugins/tpm` | Tmux Plugin Manager |
+| `nvim/dot-config/nvim` | `glyphrider/kickstart.nvim` — full neovim config |
+
+Other tmux plugins (catppuccin, tmux-battery, tmux-cpu, tmux-sensible, tmux-yank, vim-tmux-navigator) are checked in directly under `tmux/dot-tmux/plugins/`.
