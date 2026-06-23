@@ -1,0 +1,8 @@
+#!/bin/bash
+# Launch waybar behind a Hyprland IPC proxy that translates old dispatch
+# commands to the Lua format required by Hyprland 0.55+.
+python3 ~/.local/bin/hypr-ipc-proxy.py &
+PROXY_PID=$!
+trap "kill $PROXY_PID 2>/dev/null" EXIT
+sleep 0.4
+HYPRLAND_INSTANCE_SIGNATURE="${HYPRLAND_INSTANCE_SIGNATURE}-proxy" waybar
