@@ -34,7 +34,7 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 | Package | What it configures | Arch packages |
 |---|---|---|
 | `hyprland/` | Hyprland WM, hyprlock, hypridle, hyprpaper, GTK, XDG portals | `hyprland` `hyprlock` `hypridle` `hyprpaper` `hyprpolkitagent` `xdg-desktop-portal-hyprland` `xdg-desktop-portal-gtk` `archlinux-wallpaper` `brightnessctl` `playerctl` `wireplumber` `wmenu` `hyprlauncher`(AUR) `ttf-firacode-nerd` |
-| `waybar/` | Waybar status bar (active config in `dot-config/waybar/`) | `waybar` `pavucontrol` |
+| `waybar/` | Waybar status bar (active config in `dot-config/waybar/`) | `waybar` `pavucontrol` `blueman` `grim` |
 | `mako/` | Mako notification daemon | `mako` `libnotify` |
 | `kitty/` | Kitty terminal | `kitty` `ttf-noto-nerd` |
 | `alacritty/` | Alacritty terminal | `alacritty` `ttf-firacode-nerd` |
@@ -48,6 +48,27 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 | `pass/` | `pass` password store (`~/.password-store/`) with GPG-encrypted keys | `pass` `gnupg` |
 
 `dot-config/` at the repo root holds older/inactive configs (sway, wofi, nvim, older hyprland/waybar). The active hyprland config lives in `hyprland/dot-config/hypr/`.
+
+## Post-install configuration (not managed by stow)
+
+Some system state lives outside stow and must be set manually after a fresh install.
+
+### Bluetooth / blueman
+
+`blueman` is installed for device pairing via `blueman-manager`. Waybar has a built-in bluetooth module, so the blueman tray icon is disabled to avoid duplication.
+
+Disable tray icon plugins:
+```bash
+gsettings set org.blueman.general plugin-list "['!StatusNotifierItem', '!StatusIcon']"
+```
+
+Suppress XDG autostart for the applet (the applet still runs via D-Bus for the manager):
+```bash
+mkdir -p ~/.config/autostart
+echo -e '[Desktop Entry]\nHidden=true' > ~/.config/autostart/blueman.desktop
+```
+
+The Waybar bluetooth module (`on-click = blueman-manager`) is the primary UI. Click it to open the pairing manager.
 
 ## Hyprland config
 
