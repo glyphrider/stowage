@@ -54,6 +54,14 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 
 Some system state lives outside stow and must be set manually after a fresh install.
 
+### Stow all packages
+
+After cloning, stow each package. Most map to `~/.config/` automatically; `scripts` maps to `~/.local/bin/`:
+
+```bash
+stow hyprland waybar mako kitty alacritty zsh tmux git nvim vim ssh gh pass scripts
+```
+
 ### Bluetooth / blueman
 
 `blueman` is installed for device pairing via `blueman-manager`. Waybar has a built-in bluetooth module, so the blueman tray icon is disabled to avoid duplication.
