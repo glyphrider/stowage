@@ -79,6 +79,21 @@ echo -e '[Desktop Entry]\nHidden=true' > ~/.config/autostart/blueman.desktop
 
 The Waybar bluetooth module (`on-click = blueman-manager`) is the primary UI. Click it to open the pairing manager.
 
+## Waybar config
+
+Config lives in `waybar/dot-config/waybar/config` (JSON) and `style.css`.
+The bar sits at the top of DP-1 only (`"layer": "top"`, `"position": "top"`).
+
+| Position | Module | Notes |
+|---|---|---|
+| Left | `hyprland/workspaces` | Shows workspace IDs; click to switch (requires IPC proxy — see below) |
+| Center | `custom/clock` | `date` exec, updates every 10 s |
+| Right | `tray` | System tray |
+| Right | `bluetooth` | Click opens `blueman-manager`; tray icon disabled separately |
+| Right | `pulseaudio` | Click toggles mute; scroll adjusts volume ±5% |
+| Right | `network` | Ethernet/Wi-Fi/disconnected icons |
+| Right | `battery` | Hidden on desktop (no batteries warning is expected) |
+
 ## Waybar workspace clicking — Hyprland IPC proxy
 
 Hyprland 0.55+ changed its IPC dispatch format to Lua expressions, breaking
