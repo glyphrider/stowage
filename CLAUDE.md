@@ -46,6 +46,7 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 | `ssh/` | `~/.ssh/config` | `openssh` |
 | `gh/` | GitHub CLI config | `github-cli` |
 | `pass/` | `pass` password store (`~/.password-store/`) with GPG-encrypted keys | `pass` `gnupg` |
+| `scripts/` | Helper scripts in `~/.local/bin/` | — |
 
 `dot-config/` at the repo root holds older/inactive configs (sway, wofi, nvim, older hyprland/waybar). The active hyprland config lives in `hyprland/dot-config/hypr/`.
 
@@ -69,6 +70,34 @@ echo -e '[Desktop Entry]\nHidden=true' > ~/.config/autostart/blueman.desktop
 ```
 
 The Waybar bluetooth module (`on-click = blueman-manager`) is the primary UI. Click it to open the pairing manager.
+
+## Waybar workspace clicking — Hyprland IPC proxy
+
+Hyprland 0.55+ changed its IPC dispatch format to Lua expressions, breaking
+waybar's native workspace button clicks. A socket proxy works around this:
+
+- `scripts/dot-local/bin/hypr-ipc-proxy.py` — asyncio daemon that proxies the
+  Hyprland IPC socket, translating old-style dispatch commands to new Lua format
+  (e.g. `dispatch workspace 3` → `dispatch hl.dsp.focus({ workspace = 3 })`)
+- `scripts/dot-local/bin/waybar-hypr` — wrapper that starts the proxy then
+  launches waybar with `HYPRLAND_INSTANCE_SIGNATURE` pointing at the proxy
+- `hyprland.lua` uses `waybar-hypr` instead of `waybar` so this is automatic
+
+**Removing the proxy when no longer needed** (e.g. after waybar is updated to
+send the new Lua format natively):
+
+```bash
+# 1. Revert hyprland.lua to launch waybar directly
+#    Change: hl.exec_cmd("waybar-hypr")
+#    Back to: hl.exec_cmd("waybar")
+
+# 2. Remove the scripts package
+stow -D scripts
+rm -rf scripts/
+
+# 3. Restart waybar normally
+pkill waybar && waybar &
+```
 
 ## Hyprland config
 
