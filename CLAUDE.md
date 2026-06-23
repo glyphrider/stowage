@@ -33,8 +33,8 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 
 | Package | What it configures | Arch packages |
 |---|---|---|
-| `hyprland/` | Hyprland WM, hyprlock, hypridle, hyprpaper, GTK, XDG portals | `hyprland` `hyprlock` `hypridle` `hyprpaper` `hyprpolkitagent` `xdg-desktop-portal-hyprland` `xdg-desktop-portal-gtk` `archlinux-wallpaper` `brightnessctl` `playerctl` `wireplumber` `wmenu` `hyprlauncher`(AUR) |
-| `waybar/` | Waybar status bar (active config in `dot-config/waybar/`) | `waybar` `pavucontrol` `blueman` `grim` |
+| `hyprland/` | Hyprland WM, hyprlock, hypridle, hyprpaper, GTK, XDG portals | `hyprland` `hyprlock` `hypridle` `hyprpaper` `hyprpolkitagent` `xdg-desktop-portal` `xdg-desktop-portal-hyprland` `xdg-desktop-portal-gtk` `archlinux-wallpaper` `brightnessctl` `playerctl` `wireplumber` `wmenu` `ttf-noto-nerd` `hyprlauncher`(AUR) |
+| `waybar/` | Waybar status bar (active config in `dot-config/waybar/`) | `waybar` `pavucontrol` `blueman` `grim` `ttf-noto-nerd` |
 | `mako/` | Mako notification daemon | `mako` `libnotify` |
 | `kitty/` | Kitty terminal | `kitty` `ttf-noto-nerd` |
 | `alacritty/` | Alacritty terminal | `alacritty` `ttf-firacode-nerd` |
@@ -46,7 +46,7 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 | `ssh/` | `~/.ssh/config` | `openssh` |
 | `gh/` | GitHub CLI config | `github-cli` |
 | `pass/` | `pass` password store (`~/.password-store/`) with GPG-encrypted keys | `pass` `gnupg` |
-| `scripts/` | Helper scripts in `~/.local/bin/` | — |
+| `scripts/` | Helper scripts in `~/.local/bin/` | `python` |
 
 `dot-config/` at the repo root holds older/inactive configs (sway, wofi, nvim, older hyprland/waybar). The active hyprland config lives in `hyprland/dot-config/hypr/`.
 
