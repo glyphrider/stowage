@@ -33,7 +33,7 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 
 | Package | What it configures | Arch packages |
 |---|---|---|
-| `hyprland/` | Hyprland WM, hyprlock, hypridle, hyprpaper, GTK, XDG portals | `hyprland` `hyprlock` `hypridle` `hyprpaper` `hyprpolkitagent` `xdg-desktop-portal-hyprland` `xdg-desktop-portal-gtk` `archlinux-wallpaper` `brightnessctl` `playerctl` `wireplumber` `wmenu` `hyprlauncher`(AUR) `ttf-firacode-nerd` |
+| `hyprland/` | Hyprland WM, hyprlock, hypridle, hyprpaper, GTK, XDG portals | `hyprland` `hyprlock` `hypridle` `hyprpaper` `hyprpolkitagent` `xdg-desktop-portal-hyprland` `xdg-desktop-portal-gtk` `archlinux-wallpaper` `brightnessctl` `playerctl` `wireplumber` `wmenu` `hyprlauncher`(AUR) |
 | `waybar/` | Waybar status bar (active config in `dot-config/waybar/`) | `waybar` `pavucontrol` `blueman` `grim` |
 | `mako/` | Mako notification daemon | `mako` `libnotify` |
 | `kitty/` | Kitty terminal | `kitty` `ttf-noto-nerd` |
@@ -124,7 +124,64 @@ pkill waybar && waybar &
 
 ## Hyprland config
 
-The main Hyprland config is `hyprland/dot-config/hypr/hyprland.lua` — a Lua file using the `hl.*` API (Hyprland's native Lua config). Workspaces 1–5 are pinned to DP-1 and 6–10 to DP-2. `SUPER` is the main modifier.
+The main config is `hyprland/dot-config/hypr/hyprland.lua` — Lua using the `hl.*` API.
+
+**Monitors:** DP-1 is primary (2560×1440@144 Hz), DP-2 is secondary. Workspaces 1–5 are pinned to DP-1, 6–10 to DP-2.
+
+**Auto-started on `hyprland.start`:**
+- `dbus-update-activation-environment` — propagates Wayland/XDG env to systemd
+- `systemctl --user start hyprpolkitagent` — polkit authentication agent
+- `/usr/lib/xdg-desktop-portal-gtk` and `xdg-desktop-portal` — portals
+- `hyprpaper`, `hypridle`, `mako`, `waybar-hypr`
+
+**Key variables:** terminal = kitty+zsh, menu = wmenu-run, launcher = hyprlauncher. GTK theme is Adwaita:dark.
+
+**Gestures:** 3-finger horizontal swipe switches workspaces.
+
+**Key bindings (SUPER = mod key):**
+
+| Binding | Action |
+|---|---|
+| `SUPER+Return` | Open terminal (kitty) |
+| `SUPER+D` | wmenu-run launcher |
+| `SUPER+R` | hyprlauncher |
+| `SUPER+Q` | Close window |
+| `SUPER+V` | Toggle float |
+| `SUPER+X` | Lock screen (hyprlock) |
+| `SUPER+1–10` | Switch to workspace |
+| `SUPER+SHIFT+1–10` | Move window to workspace |
+| `SUPER+S` | Toggle special workspace (scratchpad) |
+| `SUPER+arrows` | Focus direction |
+| `SUPER+mouse drag` | Move window |
+| `SUPER+mouse_down/up` | Scroll workspaces |
+
+## hyprpaper config
+
+Config: `hyprland/dot-config/hypr/hyprpaper.conf`. All wallpapers from `archlinux-wallpaper` (`/usr/share/backgrounds/archlinux/`) are preloaded. Active wallpaper is `simple.png` (dark charcoal with the Arch Linux logo in blue), applied to all monitors with `fit_mode = cover`.
+
+To change the wallpaper, update the `wallpaper { path = ... }` block. The preload list keeps all arch wallpapers in GPU memory so switching is instant.
+
+## hypridle config
+
+Config: `hyprland/dot-config/hypr/hypridle.conf`. Idle behavior:
+
+| Timeout | Action |
+|---|---|
+| 2.5 min | Dim backlight to minimum (brightness saved/restored with `brightnessctl -s/-r`) |
+| 5 min | Lock screen (`loginctl lock-session` → hyprlock) |
+| 5.5 min | Turn displays off (`hyprctl dispatch dpms off`) |
+| Sleep | Lock before suspend; restore DPMS on wake |
+
+## hyprlock config
+
+Config: `hyprland/dot-config/hypr/hyprlock.conf`. Font is **Noto Sans** (`ttf-noto-nerd`, shared with kitty). Background is a blurred screenshot (3 passes).
+
+Colors match the `simple.png` wallpaper palette (Arch Linux blues):
+- Input field border: `#228DC1` → `#197098` gradient
+- Check state: `#197098` → `#1E4C5F`
+- Fail state: red gradient (semantic)
+
+Layout: time (90pt) and date (25pt) top-right with a small inset from the edge; input field centered.
 
 ## tmux plugins
 
