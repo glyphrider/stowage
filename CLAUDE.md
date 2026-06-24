@@ -47,7 +47,7 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 | `gh/` | GitHub CLI config | `github-cli` |
 | `pass/` | `pass` password store (`~/.password-store/`) with GPG-encrypted keys | `pass` `gnupg` |
 | `scripts/` | Helper scripts in `~/.local/bin/` | `python` |
-| `wallpapers/` | Custom wallpapers in `~/Pictures/wallpapers/` | — |
+| `wallpapers/` | Custom wallpapers in `~/Pictures/wallpapers/` | `imagemagick` |
 
 `dot-config/` at the repo root holds older/inactive configs (sway, wofi, nvim, older hyprland/waybar). The active hyprland config lives in `hyprland/dot-config/hypr/`.
 
