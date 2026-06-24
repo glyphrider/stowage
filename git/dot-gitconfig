@@ -7,7 +7,7 @@
   gpgSign = true
 
 [commit]
-  # gpgSign = true
+  gpgSign = true
 
 [pull]
   rebase = "true"
