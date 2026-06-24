@@ -47,6 +47,7 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 | `gh/` | GitHub CLI config | `github-cli` |
 | `pass/` | `pass` password store (`~/.password-store/`) with GPG-encrypted keys | `pass` `gnupg` |
 | `scripts/` | Helper scripts in `~/.local/bin/` | `python` |
+| `wallpapers/` | Custom wallpapers in `~/Pictures/wallpapers/` | — |
 
 `dot-config/` at the repo root holds older/inactive configs (sway, wofi, nvim, older hyprland/waybar). The active hyprland config lives in `hyprland/dot-config/hypr/`.
 
@@ -59,7 +60,7 @@ Some system state lives outside stow and must be set manually after a fresh inst
 After cloning, stow each package. Most map to `~/.config/` automatically; `scripts` maps to `~/.local/bin/`:
 
 ```bash
-stow hyprland waybar mako kitty alacritty zsh tmux git nvim vim ssh gh pass scripts
+stow hyprland waybar mako kitty alacritty zsh tmux git nvim vim ssh gh pass scripts wallpapers
 ```
 
 ### Bluetooth / blueman
@@ -157,9 +158,37 @@ The main config is `hyprland/dot-config/hypr/hyprland.lua` — Lua using the `hl
 
 ## hyprpaper config
 
-Config: `hyprland/dot-config/hypr/hyprpaper.conf`. All wallpapers from `archlinux-wallpaper` (`/usr/share/backgrounds/archlinux/`) are preloaded. Active wallpaper is `simple.png` (dark charcoal with the Arch Linux logo in blue), applied to all monitors with `fit_mode = cover`.
+Config: `hyprland/dot-config/hypr/hyprpaper.conf`. Wallpapers are set per-monitor:
 
-To change the wallpaper, update the `wallpaper { path = ... }` block. The preload list keeps all arch wallpapers in GPU memory so switching is instant.
+| Monitor | Wallpaper |
+|---|---|
+| DP-1 | `simple.png` (dark charcoal, Arch Linux logo in blue) from `archlinux-wallpaper` |
+| DP-2 | `~/Pictures/wallpapers/wallpaper_msi_dark.png` (custom, see below) |
+
+All arch wallpapers from `/usr/share/backgrounds/archlinux/` are preloaded so switching is instant. To change a wallpaper, update the relevant `wallpaper { monitor = ..., path = ... }` block.
+
+### Custom wallpapers (`wallpapers/` package)
+
+Stows to `~/Pictures/wallpapers/`. Add new wallpapers here and preload them in `hyprpaper.conf`.
+
+| File | Source | Notes |
+|---|---|---|
+| `wallpaper_msi_dark.png` | https://storage-asset.msi.com/global/picture/wallpaper/wallpaper_15783783195e14244fac940.jpg | Blue monochrome, darkened for use behind semi-transparent windows |
+
+The dark variant was generated with ImageMagick from the original JPEG:
+
+```bash
+magick wallpaper_15783783195e14244fac940.jpg \
+  -colorspace Gray \
+  -colorspace sRGB \
+  -channel R -evaluate multiply 0.03 \
+  -channel G -evaluate multiply 0.08 \
+  -channel B -evaluate multiply 0.55 \
+  +channel \
+  wallpaper_msi_dark.png
+```
+
+This converts to grayscale for luminance, then suppresses R and G channels to produce shades-of-blue-only output. Output is PNG (lossless) to avoid JPEG compression artifacts in dark areas.
 
 ## hypridle config
 
