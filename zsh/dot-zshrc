@@ -79,7 +79,7 @@ zstyle ':omz:plugins:ssh-agent' helper ksshaskpass
 # Aliases
 alias ls='eza --color=auto --icons --git'
 alias stow="stow -t $HOME --dotfiles" #  --no-folding"
-alias vim="nvim"
+#alias vim="nvim"
 alias ydlmkv='yt-dlp -f "bestvideo&#91;ext=mkv]+bestaudio&#91;ext=mka]/best&#91;ext=mkv]/best"'
 
 # Shell Integration(s)
