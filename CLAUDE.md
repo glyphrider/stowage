@@ -34,7 +34,7 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 | Package | What it configures | Arch packages |
 |---|---|---|
 | `hyprland/` | Hyprland WM, hyprlock, hypridle, hyprpaper, GTK, XDG portals | `hyprland` `hyprlock` `hypridle` `hyprpaper` `hyprpolkitagent` `xdg-desktop-portal` `xdg-desktop-portal-hyprland` `xdg-desktop-portal-gtk` `archlinux-wallpaper` `brightnessctl` `playerctl` `wireplumber` `wmenu` `ttf-noto-nerd` `hyprlauncher`(AUR) |
-| `waybar/` | Waybar status bar (active config in `dot-config/waybar/`) | `waybar` `pavucontrol` `blueman` `grim` `ttf-noto-nerd` |
+| `waybar/` | Waybar status bar (active config in `dot-config/waybar/`) | `waybar` `pavucontrol` `blueman` `grim` `slurp` `wl-clipboard` `ttf-noto-nerd` |
 | `mako/` | Mako notification daemon | `mako` `libnotify` |
 | `kitty/` | Kitty terminal | `kitty` `ttf-noto-nerd` |
 | `alacritty/` | Alacritty terminal | `alacritty` `ttf-firacode-nerd` |

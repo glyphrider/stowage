@@ -254,6 +254,10 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
+-- Screenshots
+hl.bind("PRINT", hl.dsp.exec_cmd("grim - | wl-copy"))
+hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy"))
+
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
