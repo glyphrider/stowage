@@ -13,7 +13,7 @@ hl.monitor({
 	output = "DP-2",
 	mode = "preferred",
 	position = "auto",
-	scale = "1.25",
+	scale = "auto",
 	transform = 1,
 })
 
