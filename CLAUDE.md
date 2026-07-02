@@ -212,6 +212,33 @@ Colors match the `simple.png` wallpaper palette (Arch Linux blues):
 
 Layout: time (90pt) and date (25pt) top-right with a small inset from the edge; input field centered.
 
+## kmscon (virtual terminal)
+
+kmscon replaces the kernel's built-in VTs (`agetty`) with a KMS/DRM-based terminal that supports proper font rendering and Unicode. Config is **not** managed by stow because `kmsconvt@.service` runs as root and reads `/etc/kmscon/kmscon.conf`, not `~/.config/`.
+
+Install:
+```bash
+sudo pacman -S kmscon
+```
+
+Create `/etc/kmscon/kmscon.conf`:
+```ini
+font-name=Noto Sans Mono
+font-size=14
+xkb-layout=us
+palette=solarized-dark
+hwaccel=true
+```
+
+`hwaccel=true` is safe — RX 5700 XT on `amdgpu` has full KMS/GBM support.
+
+Enable as the system getty (replaces all VTs via logind's `autovt` template):
+```bash
+sudo ln -s /usr/lib/systemd/system/kmsconvt@.service \
+           /etc/systemd/system/autovt@.service
+sudo systemctl daemon-reload
+```
+
 ## tmux plugins
 
 Two submodules require initialization after cloning:
