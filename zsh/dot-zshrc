@@ -163,8 +163,12 @@ fi
 for _id in id_rsa id_rsa2048 id_ed25519 id_ed25519_sk; do
 	_key="$HOME/.ssh/$_id"
 	[[ -f "$_key" ]] || continue
-	ssh-add -l 2>/dev/null | grep -qF "$(ssh-keygen -lf "$_key" | awk '{print $2}')" \
-		|| SSH_ASKPASS=ksshaskpass ssh-add "$_key" </dev/null
+	ssh-add -l 2>/dev/null | grep -qF "$(ssh-keygen -lf "$_key" | awk '{print $2}')" && continue
+	if (( $+commands[ksshaskpass] )); then
+		SSH_ASKPASS=ksshaskpass ssh-add "$_key" </dev/null
+	else
+		ssh-add "$_key"
+	fi
 done
 unset _id _key
 
