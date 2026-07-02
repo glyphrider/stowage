@@ -149,10 +149,20 @@ alias awsume='. awsume'
 
 # ssh-agent: reuse a cached agent across shells; skip if a forwarded
 # agent socket is already present. Uses ksshaskpass for passphrase prompts.
-if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
+# A plain "-S $SSH_AUTH_SOCK" check isn't enough: the socket file can
+# outlive an agent that died ungracefully (crash, kill -9, hard reboot),
+# so we confirm something is actually listening via `ssh-add -l` (exit
+# code 2 means "can't connect to agent").
+_ssh_agent_alive() {
+	[[ -S "$SSH_AUTH_SOCK" ]] || return 1
+	ssh-add -l >/dev/null 2>&1
+	(( $? != 2 ))
+}
+
+if ! _ssh_agent_alive; then
 	_ssh_agent_env="$HOME/.ssh/environment-$HOST"
 	[[ -f "$_ssh_agent_env" ]] && source "$_ssh_agent_env" >/dev/null
-	if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
+	if ! _ssh_agent_alive; then
 		ssh-agent -s | sed '/^echo/d' >! "$_ssh_agent_env"
 		chmod 600 "$_ssh_agent_env"
 		source "$_ssh_agent_env" >/dev/null
