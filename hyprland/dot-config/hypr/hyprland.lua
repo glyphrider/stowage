@@ -21,7 +21,7 @@ hl.monitor({
 ---- MY PROGRAMS ----
 ---------------------
 
-local terminal = "env SHELL=/usr/bin/zsh kitty /usr/bin/zsh"
+local terminal = "kitty"
 local fileManager = "dolphin"
 local menu = "wmenu-run"
 local launcher = "hyprlauncher"
