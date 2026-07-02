@@ -34,6 +34,7 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 | Package | What it configures | Arch packages |
 |---|---|---|
 | `hyprland/` | Hyprland WM, hyprlock, hypridle, hyprpaper, GTK, XDG portals | `hyprland` `hyprlock` `hypridle` `hyprpaper` `hyprpolkitagent` `xdg-desktop-portal` `xdg-desktop-portal-hyprland` `xdg-desktop-portal-gtk` `archlinux-wallpaper` `brightnessctl` `playerctl` `wireplumber` `wmenu` `ttf-noto-nerd` `hyprlauncher`(AUR) |
+| `kde/` | KDE Plasma (Wayland), KWin, Konsole, GTK bridge (`xsettingsd`, `gtkrc*`) | `plasma-meta` `sddm` `dolphin` `konsole` |
 | `waybar/` | Waybar status bar (active config in `dot-config/waybar/`) | `waybar` `pavucontrol` `blueman` `grim` `slurp` `wl-clipboard` `ttf-noto-nerd` |
 | `mako/` | Mako notification daemon | `mako` `libnotify` |
 | `kitty/` | Kitty terminal | `kitty` `ttf-noto-nerd` |
@@ -60,7 +61,7 @@ Some system state lives outside stow and must be set manually after a fresh inst
 After cloning, stow each package. Most map to `~/.config/` automatically; `scripts` maps to `~/.local/bin/`:
 
 ```bash
-stow hyprland waybar mako kitty alacritty zsh tmux git nvim vim ssh gh pass scripts wallpapers
+stow hyprland kde waybar mako kitty alacritty zsh tmux git nvim vim ssh gh pass scripts wallpapers
 ```
 
 ### Bluetooth / blueman
