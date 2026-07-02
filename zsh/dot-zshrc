@@ -1,54 +1,6 @@
-# Setup ZINIT
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-if [ ! -d "$ZINIT_HOME" ]; then
-	mkdir -p "$(dirname $ZINIT_HOME)"
-	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-
-source "${ZINIT_HOME}/zinit.zsh"
-
-# Plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
-
-# zinit light denysdovhan/spaceship-prompt
-
-# Snippets
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
-# zinit snippet OMZP::aws
-zinit snippet OMZP::command-not-found
-
-# zstyle :omz:plugins:ssh-agent helper ksshaskpass
-zstyle :omz:plugins:ssh-agent agent-forwarding yes
-zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa2048 id_ed25519 id_ed25519_sk
-zstyle :omz:plugins:eza dirs-first yes
-zstyle :omz:plugins:eza git-status yes
-zstyle :omz:plugins:eza show-group yes
-
-zinit snippet OMZP::ssh-agent
-
-# Git Prompt
-autoload -Uz vcs_info
-
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' formats "[%F{green}%r:%b%f%u%c]"
-zstyle ':vcs_info:git:*' actionformats "[%F{green}%r:%b%F{white}(%a)%f%u%c]"
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr '%F{yellow}%B*%b%f'
-zstyle ':vcs_info:*' unstagedstr '%F{red}%B+%b%f'
-
-setopt prompt_subst
-add-zsh-hook precmd vcs_info
-export PROMPT='%(!.%F{red}.%F{green})%n%f@%F{cyan}%m%f%(?..%F{red}($?%)%f):%F{blue}%2~%f${vcs_info_msg_0_}%(!.%F{red}>>%f.>) '
-
-autoload -U compinit && compinit
-
-zinit cdreplay -q
+# Completion
+zmodload zsh/complist
+autoload -Uz compinit && compinit
 
 # Key Bindings
 bindkey -e
@@ -71,20 +23,108 @@ setopt hist_find_no_dups
 # Completion Styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-zstyle ':omz:plugins:ssh-agent' helper ksshaskpass
+zstyle ':completion:*' menu select
+
+# Git Prompt
+autoload -Uz vcs_info add-zsh-hook
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats "[%F{green}%r:%b%f%u%c]"
+zstyle ':vcs_info:git:*' actionformats "[%F{green}%r:%b%F{white}(%a)%f%u%c]"
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr '%F{yellow}%B*%b%f'
+zstyle ':vcs_info:*' unstagedstr '%F{red}%B+%b%f'
+
+setopt prompt_subst
+add-zsh-hook precmd vcs_info
+export PROMPT='%(!.%F{red}.%F{green})%n%f@%F{cyan}%m%f%(?..%F{red}($?%)%f):%F{blue}%2~%f${vcs_info_msg_0_}%(!.%F{red}>>%f.>) '
+
+# Sudo-prepend widget (Esc Esc toggles "sudo " on the command line)
+# Ported from oh-my-zsh's sudo plugin -- no external deps.
+__sudo-replace-buffer() {
+	local old=$1 new=$2 space=${2:+ }
+	if [[ $CURSOR -le ${#old} ]]; then
+		BUFFER="${new}${space}${BUFFER#$old }"
+		CURSOR=${#new}
+	else
+		LBUFFER="${new}${space}${LBUFFER#$old }"
+	fi
+}
+
+sudo-command-line() {
+	[[ -z $BUFFER ]] && LBUFFER="$(fc -ln -1)"
+	local WHITESPACE=""
+	if [[ ${LBUFFER:0:1} = " " ]]; then
+		WHITESPACE=" "
+		LBUFFER="${LBUFFER:1}"
+	fi
+	case "$BUFFER" in
+		sudo\ *) __sudo-replace-buffer "sudo" "" ;;
+		*) LBUFFER="sudo $LBUFFER" ;;
+	esac
+	LBUFFER="${WHITESPACE}${LBUFFER}"
+	zle && zle redisplay
+}
+zle -N sudo-command-line
+bindkey -M emacs '\e\e' sudo-command-line
+bindkey -M vicmd '\e\e' sudo-command-line
+bindkey -M viins '\e\e' sudo-command-line
 
 # Aliases
-alias ls='eza --color=auto --icons --git'
+alias ls='eza --color=auto --icons --git --group-directories-first --group'
 alias stow="stow -t $HOME --dotfiles" #  --no-folding"
 #alias vim="nvim"
 alias ydlmkv='yt-dlp -f "bestvideo&#91;ext=mkv]+bestaudio&#91;ext=mka]/best&#91;ext=mkv]/best"'
 
+# Pacman - https://wiki.archlinux.org/index.php/Pacman_Tips
+alias pacupg='sudo pacman -Syu'
+alias pacin='sudo pacman -S'
+alias paclean='sudo pacman -Sc'
+alias pacins='sudo pacman -U'
+alias paclr='sudo pacman -Scc'
+alias pacre='sudo pacman -R'
+alias pacrem='sudo pacman -Rns'
+alias pacrep='pacman -Si'
+alias pacreps='pacman -Ss'
+alias pacloc='pacman -Qi'
+alias paclocs='pacman -Qs'
+alias pacinsd='sudo pacman -S --asdeps'
+alias pacmir='sudo pacman -Syy'
+alias paclsorphans='sudo pacman -Qdt'
+alias pacrmorphans='sudo pacman -Rs $(pacman -Qtdq)'
+alias pacfileupg='sudo pacman -Fy'
+alias pacfiles='pacman -F'
+alias pacls='pacman -Ql'
+alias pacown='pacman -Qo'
+alias pacupd="sudo pacman -Sy"
+
+if (( $+commands[yay] )); then
+	alias yaconf='yay -Pg'
+	alias yaclean='yay -Sc'
+	alias yaclr='yay -Scc'
+	alias yaupg='yay -Syu'
+	alias yasu='yay -Syu --noconfirm'
+	alias yain='yay -S'
+	alias yains='yay -U'
+	alias yare='yay -R'
+	alias yarem='yay -Rns'
+	alias yarep='yay -Si'
+	alias yareps='yay -Ss'
+	alias yaloc='yay -Qi'
+	alias yalocs='yay -Qs'
+	alias yalst='yay -Qe'
+	alias yaorph='yay -Qtd'
+	alias yainsd='yay -S --asdeps'
+	alias yamir='yay -Syy'
+	alias yaupd="yay -Sy"
+fi
+
 # Shell Integration(s)
 eval "$(fzf --zsh)"
 export GPG_TTY=$TTY
+
+# command-not-found (via pkgfile)
+[ -f /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # Path
 [ ! -d "$HOME/.local/bin" ] || path=("$HOME/.local/bin" $path)
@@ -107,5 +147,32 @@ alias fixhyprlock='hyprctl --instance 0 "keyword misc:allow_session_lock_restore
 
 alias awsume='. awsume'
 
+# ssh-agent: reuse a cached agent across shells; skip if a forwarded
+# agent socket is already present. Uses ksshaskpass for passphrase prompts.
+if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
+	_ssh_agent_env="$HOME/.ssh/environment-$HOST"
+	[[ -f "$_ssh_agent_env" ]] && source "$_ssh_agent_env" >/dev/null
+	if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
+		ssh-agent -s | sed '/^echo/d' >! "$_ssh_agent_env"
+		chmod 600 "$_ssh_agent_env"
+		source "$_ssh_agent_env" >/dev/null
+	fi
+	unset _ssh_agent_env
+fi
+
+for _id in id_rsa id_rsa2048 id_ed25519 id_ed25519_sk; do
+	_key="$HOME/.ssh/$_id"
+	[[ -f "$_key" ]] || continue
+	ssh-add -l 2>/dev/null | grep -qF "$(ssh-keygen -lf "$_key" | awk '{print $2}')" \
+		|| SSH_ASKPASS=ksshaskpass ssh-add "$_key" </dev/null
+done
+unset _id _key
+
 typeset -U PATH path
 _ZO_DOCTOR=0 eval "$(zoxide init --cmd cd zsh)"
+
+# Fish-like autosuggestions and syntax highlighting (Arch packages, no
+# plugin manager). Syntax highlighting must be sourced last -- it wraps
+# every ZLE widget defined above it.
+[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

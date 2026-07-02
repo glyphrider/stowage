@@ -38,7 +38,7 @@ Files and directories named `dot-*` are symlinked with the `dot-` prefix replace
 | `mako/` | Mako notification daemon | `mako` `libnotify` |
 | `kitty/` | Kitty terminal | `kitty` `ttf-noto-nerd` |
 | `alacritty/` | Alacritty terminal | `alacritty` `ttf-firacode-nerd` |
-| `zsh/` | `.zshrc`, spaceship prompt config, zsh completions (`dot-zfunc/`) | `zsh` `fzf` `zoxide` `eza` `ksshaskpass` (zinit installs itself on first shell launch) |
+| `zsh/` | `.zshrc`, zsh completions (`dot-zfunc/`) | `zsh` `fzf` `zoxide` `eza` `ksshaskpass` `zsh-syntax-highlighting` `zsh-autosuggestions` `zsh-completions` `pkgfile` |
 | `tmux/` | tmux config + TPM plugins (tpm is a git submodule) | `tmux` |
 | `git/` | `.gitconfig` | `git` |
 | `nvim/` | Neovim config via submodule (`glyphrider/kickstart.nvim`) | `neovim` |
