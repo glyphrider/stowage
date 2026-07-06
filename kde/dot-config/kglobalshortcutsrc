@@ -3,8 +3,8 @@ _k_friendly_name=Activity Manager
 switch-to-activity-3c402166-3194-4adc-851f-a319b7656a41=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
-Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,
-Switch to Next Keyboard Layout=Meta+Alt+K,Meta+Alt+K,
+Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,Switch to Last-Used Keyboard Layout
+Switch to Next Keyboard Layout=Meta+Alt+K,Meta+Alt+K,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
 
 [kaccess]
@@ -266,3 +266,7 @@ show-on-mouse-pos=Meta+V,Meta+V,Show Clipboard Items at Mouse Position
 switch to next activity=none,none,Switch to Next Activity
 switch to previous activity=none,none,Switch to Previous Activity
 toggle do not disturb=none,none,Toggle do not disturb
+
+[services][org.kde.spectacle.desktop]
+CurrentMonitorScreenShot=none
+OpenWithoutScreenshot=none

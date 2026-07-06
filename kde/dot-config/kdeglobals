@@ -134,6 +134,10 @@ ForegroundVisited=155,89,182
 
 [General]
 ColorSchemeHash=9d38eb71ded8ff549da26d57d7cbab9164da243a
+XftAntialias=true
+XftHintStyle=hintslight
+XftSubPixel=none
+fixed=Noto Sans Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
 
 [KDE]
 LookAndFeelPackage=org.kde.breezedark.desktop
