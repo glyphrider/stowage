@@ -11,6 +11,7 @@ BorderActivate=9
 
 [Plugins]
 desktopchangeosdEnabled=true
+virtualdesktopsonlyonprimaryEnabled=true
 
 [Tiling][10d3a60c-d4be-4a74-b0cf-c3234af99ada][2a51e0b7-3bc8-482a-89fb-8c205be29119]
 padding=4
