@@ -240,6 +240,37 @@ sudo ln -s /usr/lib/systemd/system/kmsconvt@.service \
 sudo systemctl daemon-reload
 ```
 
+## Plymouth (boot splash)
+
+Plymouth shows a graphical splash during boot instead of raw kernel/systemd log spam. Config is **not** managed by stow because it lives entirely under `/etc/plymouth/` and `/usr/share/plymouth/`, and requires editing the initramfs build (`/etc/mkinitcpio.conf`) and kernel cmdline (`/etc/kernel/cmdline`) — none of it is under `~/`.
+
+This machine boots via a **UKI** (unified kernel image): `mkinitcpio` (per `/etc/mkinitcpio.d/linux.preset`, `default_uki=`) builds `/boot/EFI/Linux/arch-linux.efi` directly from `/etc/kernel/cmdline` — `/etc/default/grub`'s `GRUB_CMDLINE_LINUX_DEFAULT` is not the source of truth here since `grub.cfg` has no generated Linux menuentry (GRUB is only acting as the EFI stub at `/boot/EFI/BOOT/BOOTX64.EFI`). If this ever moves to a classic vmlinuz+initrd GRUB boot, `quiet splash` should also be added to `GRUB_CMDLINE_LINUX_DEFAULT` and `grub-mkconfig` re-run.
+
+Install:
+```bash
+sudo pacman -S plymouth
+```
+
+Set the theme (official themes: `bgrt`, `details`, `fade-in`, `glow`, `script`, `solar`, `spinfinity`, `spinner`, `text`, `tribar`):
+```bash
+sudo plymouth-set-default-theme bgrt
+```
+
+Add the `plymouth` hook to `HOOKS` in `/etc/mkinitcpio.conf`, after `udev`:
+```
+HOOKS=(base udev plymouth autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)
+```
+
+Add `quiet splash loglevel=3` to `/etc/kernel/cmdline` (this is what gets embedded in the UKI):
+```
+root=PARTUUID=... rw rootfstype=btrfs quiet splash loglevel=3
+```
+
+Rebuild the UKI so the new hook/theme/cmdline take effect:
+```bash
+sudo mkinitcpio -P
+```
+
 ## tmux plugins
 
 Two submodules require initialization after cloning:
